@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+ 
+    <link rel="manifest" href="petstore.webmanifest">
+</head>
+<body>
+    <script>
+        if('serviceWorker' in navigator){
+            navigator.serviceWorker.register('service-worker.js')
+        }
+    </script>
+   <div id="app">
+       <header>
+           <h2 v-text="sitename" style="text-align: center;"></h2>
+           <button v-on:click='showCheckoutPage'>CheckOut</button>
+       </header>
+      <div class="body" v-if="showProduct">
+        <div class="main">
+              <div class="img-container">  <img v-bind:src="product.image" alt=""></div>
+         <div class="details">   <h2 v-text="product.title"></h2>
+            <p v-html='product.description'></p>
+            <h2>Price: #{{product.price}}</h2>
+            <button>Add To Cart</button></div>
+         </div>
+         <div class="dog main">
+              <div class="img-container">  <img v-bind:src="product2.image" alt="">  </div>
+            <div class="details">
+                <h2 v-text="product2.title"></h2>
+                <p v-html='product.description'></p>
+                <h2>Price: #{{product2.price}}</h2>
+                <button>Add To Cart</button>
+            </div>
+      
+         </div>
+      </div>
+
+      <div v-else>
+         <h4>This is the checkout Page</h4>
+         <p>
+             <strong>First Name:</strong>
+             <input type="text" v-model.trim="order.firstName">
+         </p>
+         <p>
+             <strong>Last Name:</strong>
+             <input type="text" v-model.trim="order.lastName">
+         </p>
+         <p><strong>Address:</strong>
+         <input type="text" v-model="order.address">
+         </p>
+ 
+         <p>
+             <strong>City:</strong>
+             <input type="text" v-model="order.city">
+         </p>
+         <p>
+             <strong>State:</strong>
+             <select name="" v-model="order.state" id="">
+                 <option value="" disabled>State</option>
+                 <option v-for="(state, key) in states" v-bind:value="state">
+                    {{key}}
+                 </option>
+                
+             </select>
+         </p>
+         <p>
+            <input type="checkbox" id="gift" value="true" v-model="order.gift" v-bind:true-value="order.sendGift" v-bind:false-value="order.dontSendGift">
+            <label for="gift">Ship as Gift?</label>
+         </p>
+         <p>
+            <input type="radio" id="home" value="home" v-model="order.method">
+            <label for="home">Home</label>
+            <input type="radio" id="business" value="business" v-model="order.method">
+            <label for="business">Business</label>
+         </p>
+         
+         <h2>Order Information</h2>
+         <p>First Name: {{order.firstName}}</p>
+         <p>Last Name: {{order.lastName}}</p>
+         <p>Address: {{order.address}}</p>
+         <p>City: {{order.city}}</p>
+         <p>Zip: {{order.zip}}</p>
+         <p>State: {{order.state}}</p>
+         <p>Gift: {{order.gift}}</p>
+         <p>Method: {{order.method}}</p>
+     </div>
+   </div>
+   <script>
+        let app = new Vue({
+        el:"#app",
+        data:{
+           sitename:"Vue.js Pet Depot",
+           showProduct:true,
+           order:{
+                    firstName:'',
+                    lastName:'',
+                    address:'',
+                    city:'',
+                    zip:'',
+                    state:'',
+                    gift:false,
+                    sendGift:'Send as a gift',
+                    dontSendGift:'Do not send as a gift'
+                },
+                states:{
+                  AL:'Alabama',
+                  AR:'Arizona',
+                  CL:"California",
+                  NV:"Nevada"
+                },
+           product:{
+               id:1001,
+               title:'Cat food 251lbs bag',
+               description:'A 25 pund bag of <em>iressistible</em> organic goodness for your cat.',
+               price:200,
+               image:'images/cat.jpg',
+               border:'blue'
+           },
+           product2:{
+               id:1002,
+               title:'Dog food 200 lbs bag',
+               description:'A 20 pound bag of <em>iressistible</em> organic goodness for your dog.',
+               price:150,
+               image:'images/dog.jpg',
+               border:'yellow'
+           },
+           
+        },
+        methods:{
+         showCheckoutPage:function(){
+            this.showProduct = !this.showProduct
+         }
+        }
+    })
+   </script>
+   <style scoped>
+     .body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+   
+     }
+     .body .main{
+        border: 1px solid rgba(128, 128, 128, 0.288);
+        
+        margin: 1rem;
+        width: 25rem;
+        border-radius: .5rem;
+
+     }
+     .main button{
+         background: #bfba55;
+         padding: .7rem;
+         border: none;
+         outline: none;
+         color: white;
+         float: left;
+         margin-bottom: .4rem;
+         box-shadow: .5px .5px .5px .5px black;
+         border-radius: 2px;
+     }
+
+     .body .main img{
+        width: 100%;
+        max-width: 100%;
+        border-top-right-radius:.5rem;
+       border-top-left-radius: .5rem;
+     }
+     
+     .details{
+        padding: .7rem;
+     }
+
+     
+    
+     
+   </style>
+</body>
+</html>
