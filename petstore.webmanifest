@@ -1,15 +1,15 @@
 {
-    "name":"My Pet Store PWA",
-    "short_name":"petstore",
-    "description":"my online pet store",
+    "name":"After school lesson",
+    "short_name":"Lesson",
+    "description":"my after school lesson app",
     "icons":[
         {
-            "src":"./images/cat.jpg",
+            "src":"./images/lesson.png",
             "sizes":"512x512",
             "type":"image/png"
         }
     ],
     "start_url":"index.html",
     "display":"fullscreen",
-    "background_color":"#201A34"
+    "background_color":"#fff"
 }

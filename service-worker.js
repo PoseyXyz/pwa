@@ -2,10 +2,7 @@ var cacheName='petstore-v1'
 var cacheFiles =[
     'index.html',
     'petstore.webmanifest',
-    './images/cat.jpg',
-    './images/dog.jpg',
-    './images/dog.png',
-    './images/maths.jpg'
+    './images/lesson.png'
 ]
 
 self.addEventListener('install', e=>{
